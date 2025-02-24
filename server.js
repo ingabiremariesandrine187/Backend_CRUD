@@ -1,18 +1,30 @@
-import express from  'express';
+import express from 'express';
 import mongoose from 'mongoose';
-import contactRoute from './Routes/contactRoute.js'
+import dotenv from 'dotenv';
+import mainRouter from './Routes/indexRoute.js';
+import bodyParser from 'body-parser';
+dotenv.config();
+const port =process.env.PORT;
+const db_user =process.env.DB_USER;
+const db_name =process.env.DB_NAME;
+const db_pass =process.env.DB_PASS;
+
+
+
 const app=express();
-   const port = process.env.PORT || 5000;
-const dbUri = `mongodb+srv://ireneeiradukunda9:TFjC3Prx7PA7CRPH@cluster0.njw9y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+app.use(express.json())
+
+app.use('/', mainRouter);
+const dbUri = `mongodb+srv://${db_user}:${db_pass}@cluster0.ppff3.mongodb.net/${db_name}`;
+
 mongoose.set("strictQuery", false);
 mongoose
   .connect(dbUri)
   .then(() => {
     console.log("Connected to MongoDB");
-    app.use(express.json());
     app.listen(port, () => {
       console.log(`Node API is running on port http://localhost:${port}`);
-      app.use('/api/contact',contactRoute)
+     
     });
   })
   .catch((error) => {

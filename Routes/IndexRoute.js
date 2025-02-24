@@ -1,5 +1,5 @@
-import  ContactRoute from ' ./ContactRoute.js';
 import express from"express";
-const router = express.Router();
-router.use("/contact",ContactRoute);
-export default router;              
+import contactRouter from "../Routes/contactRoute.js"
+const mainRouter = express.Router();
+mainRouter.use("/Contact", contactRouter);
+export default mainRouter;              
