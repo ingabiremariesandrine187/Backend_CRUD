@@ -5,8 +5,8 @@ const productRouter = express.Router();
 const upload = configureMulter ();
 productRouter.post("/createproduct" ,upload, CreateProduct);
 productRouter.get("/list",ListProduct);
-productRouter.get("/findproductbyid/:id",FindProductById)
-productRouter.put("/updateProductById/:id",updateProductById)
-productRouter.delete("/deleteProductById/:id",deleteProductById);
+productRouter.get("/findproductbyid/:id" ,upload,FindProductById)
+productRouter.put("/updateProductById/:id" ,upload,updateProductById)
+productRouter.delete("/deleteProductById/:id" ,upload,deleteProductById);
 export default productRouter;
 
